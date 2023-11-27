@@ -29,4 +29,6 @@ class QuizAttempt extends Model
         return $this->belongsTo(Quiz::class);
     }
 
+
+
 }

@@ -2,63 +2,65 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreQuestionRequest;
+use App\Http\Requests\UpdateQuestionRequest;
+use App\Models\Question;
+use App\Models\Quiz;
 use Illuminate\Http\Request;
 
 class QuestionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    function __construct()
+    {
+        $this->middleware('role:lecturer|admin', ['except' => ['index', 'show']]);
+    }
+
     public function index()
     {
-        //
+        $questions = Question::paginate(10);
+        return view('questions.index', compact('questions'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        $quizzes = Quiz::all();
+        return view('questions.create', compact('quizzes'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function store(StoreQuestionRequest $request)
     {
-        //
+        Question::create($request->validated());
+        return redirect()->route('questions.index')
+            ->with('success', 'Question created successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function show(Question $question)
     {
-        //
+        return view('questions.show', compact('question'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function edit(Question $question)
     {
-        //
+        $quizzes = Quiz::all();
+        return view('questions.edit', compact('question', 'quizzes'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function update(UpdateQuestionRequest $request, Question $question)
     {
-        //
+        $question->update($request->validated());
+        return redirect()->route('questions.index')
+            ->with('success', 'Question updated successfully.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function delete(Question $question)
     {
-        //
+        return view('questions.delete', compact('question'));
+    }
+
+    public function destroy(Question $question)
+    {
+        $question->delete();
+        return redirect()->route('questions.index')
+            ->with('success', 'Question deleted successfully.');
     }
 }

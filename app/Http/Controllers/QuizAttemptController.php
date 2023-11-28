@@ -2,63 +2,66 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreQuizAttemptRequest;
+use App\Http\Requests\UpdateQuizAttemptRequest;
+use App\Models\Quiz;
+use App\Models\QuizAttempt;
+use App\Models\User;
 
 class QuizAttemptController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    function __construct()
+    {
+        $this->middleware('role:lecturer|admin', ['except' => ['index', 'show']]);
+        // Define other middlewares as needed
+    }
+
     public function index()
     {
-        //
+        $quizAttempts = QuizAttempt::with(['user', 'quiz'])->paginate(10);
+        return view('quizAttempts.index', compact('quizAttempts'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        $users = User::all();
+        $quizzes = Quiz::all();
+        return view('quizAttempts.create', compact('users', 'quizzes'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function store(StoreQuizAttemptRequest $request)
     {
-        //
+        QuizAttempt::create($request->validated());
+        return redirect()->route('quizAttempts.index')->with('success', 'Quiz attempt created successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function show(QuizAttempt $quizAttempt)
     {
-        //
+        return view('quizAttempts.show', compact('quizAttempt'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function edit(QuizAttempt $quizAttempt)
     {
-        //
+        $users = User::all();
+        $quizzes = Quiz::all();
+        return view('quizAttempts.edit', compact('quizAttempt', 'users', 'quizzes'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function update(UpdateQuizAttemptRequest $request, QuizAttempt $quizAttempt)
     {
-        //
+        $quizAttempt->update($request->validated());
+        return redirect()->route('quizAttempts.index')->with('success', 'Quiz attempt updated successfully.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function delete(QuizAttempt $quizAttempt)
     {
-        //
+        return view('quizAttempts.delete', compact('quizAttempt'));
+    }
+
+    public function destroy(QuizAttempt $quizAttempt)
+    {
+        $quizAttempt->delete();
+        return redirect()->route('quizAttempts.index')->with('success', 'Quiz attempt deleted successfully.');
     }
 }
+

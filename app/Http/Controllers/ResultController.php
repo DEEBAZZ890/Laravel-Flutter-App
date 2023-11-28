@@ -2,63 +2,67 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreResultRequest;
+use App\Http\Requests\UpdateResultRequest;
+use App\Models\Result;
+use App\Models\QuizAttempt;
+use App\Models\User;
 
 class ResultController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    function __construct()
+    {
+        $this->middleware('role:lecturer|admin', ['except' => ['index', 'show']]);
+    }
+
     public function index()
     {
-        //
+        $results = Result::with(['quizAttempt', 'user'])->paginate(10);
+        return view('results.index', compact('results'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        $quizAttempts = QuizAttempt::all();
+        $users = User::all();
+        return view('results.create', compact('quizAttempts', 'users'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function store(StoreResultRequest $request)
     {
-        //
+        Result::create($request->validated());
+        return redirect()->route('results.index')
+            ->with('success', 'Result created successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function show(Result $result)
     {
-        //
+        return view('results.show', compact('result'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function edit(Result $result)
     {
-        //
+        $quizAttempts = QuizAttempt::all();
+        $users = User::all();
+        return view('results.edit', compact('result', 'quizAttempts', 'users'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function update(UpdateResultRequest $request, Result $result)
     {
-        //
+        $result->update($request->validated());
+        return redirect()->route('results.index')
+            ->with('success', 'Result updated successfully.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function delete(Result $result)
     {
-        //
+        return view('results.delete', compact('result'));
+    }
+
+    public function destroy(Result $result)
+    {
+        $result->delete();
+        return redirect()->route('results.index')
+            ->with('success', 'Result deleted successfully.');
     }
 }

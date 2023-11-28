@@ -2,63 +2,65 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreQuizRequest;
+use App\Http\Requests\UpdateQuizRequest;
+use App\Models\Quiz;
+use App\Models\Course;
 use Illuminate\Http\Request;
 
 class QuizController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    function __construct()
+    {
+        $this->middleware('role:lecturer|admin', ['except' => ['index', 'show']]);
+    }
+
     public function index()
     {
-        //
+        $quizzes = Quiz::with('course')->paginate(10);
+        return view('quizzes.index', compact('quizzes'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        $courses = Course::all();
+        return view('quizzes.create', compact('courses'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function store(StoreQuizRequest $request)
     {
-        //
+        Quiz::create($request->validated());
+        return redirect()->route('quizzes.index')
+            ->with('success', 'Quiz created successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function show(Quiz $quiz)
     {
-        //
+        return view('quizzes.show', compact('quiz'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function edit(Quiz $quiz)
     {
-        //
+        $courses = Course::all();
+        return view('quizzes.edit', compact('quiz', 'courses'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function update(UpdateQuizRequest $request, Quiz $quiz)
     {
-        //
+        $quiz->update($request->validated());
+        return redirect()->route('quizzes.index')
+            ->with('success', 'Quiz updated successfully.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function delete(Quiz $quiz)
     {
-        //
+        return view('quizzes.delete', compact('quiz'));
+    }
+
+    public function destroy(Quiz $quiz)
+    {
+        $quiz->delete();
+        return redirect()->route('quizzes.index')
+            ->with('success', 'Quiz deleted successfully.');
     }
 }

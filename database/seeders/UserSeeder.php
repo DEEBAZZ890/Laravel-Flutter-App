@@ -3,9 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder
 {
@@ -17,7 +15,7 @@ class UserSeeder extends Seeder
         $admin = User::create([
             'name' => 'Admin User',
             'email' => 'admin@example.com',
-            'password' => Hash::make('password'), // You should use a secure password
+            'password' => 'password', // Plain text, will be hashed automatically
         ]);
         $admin->assignRole('admin');
 
@@ -25,7 +23,7 @@ class UserSeeder extends Seeder
         $lecturer = User::create([
             'name' => 'Lecturer User',
             'email' => 'lecturer@example.com',
-            'password' => Hash::make('password'), // You should use a secure password
+            'password' => 'password', // Plain text, will be hashed automatically
         ]);
         $lecturer->assignRole('lecturer');
 
@@ -33,8 +31,9 @@ class UserSeeder extends Seeder
         $student = User::create([
             'name' => 'Student User',
             'email' => 'student@example.com',
-            'password' => Hash::make('password'), // You should use a secure password
+            'password' => 'password', // Plain text, will be hashed automatically
         ]);
         $student->assignRole('student');
     }
 }
+

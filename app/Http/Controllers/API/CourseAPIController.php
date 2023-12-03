@@ -7,6 +7,11 @@ use App\Http\Requests\UpdateCourseAPIRequest;
 use App\Models\Course;
 use Illuminate\Http\JsonResponse;
 
+/**
+ * @group Course API
+ *
+ * API endpoints for managing courses
+ */
 class CourseAPIController extends ApiBaseController
 {
     public function index(): JsonResponse

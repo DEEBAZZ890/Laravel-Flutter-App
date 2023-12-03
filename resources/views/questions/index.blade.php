@@ -39,16 +39,19 @@
                                         <a href="{{ route('questions.show', $question->id) }}"
                                            class="px-2 w-12 text-center rounded-md border border-emerald-600
                                           hover:bg-emerald-600 hover:text-white transition duration-500">
+                                            <span class="sr-only">View</span>
                                             <i class="fa fa-eye"></i>
                                         </a>
                                         <a href="{{ route('questions.edit', $question->id) }}"
                                            class="px-2 w-12 text-center rounded-md border border-sky-600
                                           hover:bg-sky-600 hover:text-white transition duration-500">
+                                            <span class="sr-only">Edit</span>
                                             <i class="fa fa-pen"></i>
                                         </a>
                                         <a href="{{ route('questions.delete', $question->id) }}"
                                            class="px-2 w-12 text-center rounded-md border border-red-600
                                           hover:bg-red-600 hover:text-white transition duration-500">
+                                            <span class="sr-only">Delete</span>
                                             <i class="fa fa-trash"></i>
                                         </a>
                                     </td>

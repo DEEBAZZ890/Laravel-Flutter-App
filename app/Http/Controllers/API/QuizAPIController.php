@@ -8,6 +8,11 @@ use App\Http\Requests\StoreQuizAPIRequest;
 use App\Http\Requests\UpdateQuizAPIRequest;
 use Illuminate\Http\JsonResponse;
 
+/**
+ * @group Quiz API
+ *
+ * API endpoints for managing quizzes
+ */
 class QuizAPIController extends ApiBaseController
 {
     /**

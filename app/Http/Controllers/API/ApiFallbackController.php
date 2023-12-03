@@ -6,6 +6,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
+/**
+ * @group Fallback API
+ *
+ * API endpoints for managing fallback responses
+ */
 class ApiFallbackController extends ApiBaseController
 {
     /**

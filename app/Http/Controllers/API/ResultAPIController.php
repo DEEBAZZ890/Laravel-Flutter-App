@@ -9,6 +9,11 @@ use App\Http\Requests\UpdateResultAPIRequest;
 use App\Models\Result;
 use Illuminate\Http\JsonResponse;
 
+/**
+ * @group Result API
+ *
+ * API endpoints for managing results
+ */
 class ResultAPIController extends ApiBaseController
 {
     /**

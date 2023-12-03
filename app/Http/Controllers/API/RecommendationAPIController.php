@@ -8,6 +8,11 @@ use App\Http\Requests\UpdateRecommendationAPIRequest;
 use App\Models\Recommendation;
 use Illuminate\Http\JsonResponse;
 
+/**
+ * @group Recommendation API
+ *
+ * API endpoints for managing recommendations
+ */
 class RecommendationAPIController extends ApiBaseController
 {
     /**

@@ -9,7 +9,13 @@ use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 
+/**
+ * @group Auth API
+ *
+ * API endpoints for managing authentication for the user
+ */
 class AuthAPIController extends ApiBaseController
 {
     /**
@@ -63,7 +69,9 @@ class AuthAPIController extends ApiBaseController
      */
     public function login(LoginAPIRequest $request)
     {
+        Log::info('Login Request:', $request->only('email', 'password'));
         if (!\Auth::attempt($request->only('email', 'password'))) {
+            Log::info('Login failed for user: ' . $request->email);
             return $this->sendError('Login information is invalid.', [], 401);
         }
 

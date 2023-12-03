@@ -6,6 +6,11 @@ use App\Http\Requests\StoreQuestionAPIRequest;
 use App\Http\Requests\UpdateQuestionAPIRequest;
 use App\Models\Question;
 
+/**
+ * @group Question API
+ *
+ * API endpoints for managing questions
+ */
 class QuestionAPIController extends ApiBaseController
 {
     public function index()

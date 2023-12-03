@@ -5,6 +5,11 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+/**
+ * @group Setting API
+ *
+ * API endpoints for managing settings
+ */
 class SettingApiController extends Controller
 {
     /**

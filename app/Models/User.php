@@ -34,14 +34,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    // Automatically hash the password when set.
-    public function setPasswordAttribute($value)
-    {
-        if ($value !== null && $value !== '') {
-            $this->attributes['password'] = Hash::make($value);
-        }
-    }
-
     // Relationships
 
     public function quizAttempts()

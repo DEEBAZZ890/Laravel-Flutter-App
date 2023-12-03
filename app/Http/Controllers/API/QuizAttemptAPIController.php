@@ -10,6 +10,11 @@ use App\Models\QuizAttempt;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Carbon;
 
+/**
+ * @group Quiz Attempt API
+ *
+ * API endpoints for managing quiz attempts
+ */
 class QuizAttemptAPIController extends ApiBaseController
 {
     public function index(PaginationAPIRequest $request): JsonResponse

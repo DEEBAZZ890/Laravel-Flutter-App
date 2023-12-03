@@ -6,6 +6,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
+/**
+ * @group Api Base API
+ *
+ * API endpoints for managing Json responses
+ */
 class ApiBaseController extends Controller
 {
     /**

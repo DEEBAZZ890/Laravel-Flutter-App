@@ -1,0 +1,1372 @@
+openapi: 3.0.3
+info:
+  title: Laravel
+  description: ''
+  version: 1.0.0
+servers:
+  -
+    url: 'http://localhost'
+paths:
+  /api/answers:
+    get:
+      summary: ''
+      operationId: getApiAnswers
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - 'Answer API'
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                page:
+                  type: integer
+                  description: 'Must be at least 1.'
+                  example: 43
+                per_page:
+                  type: integer
+                  description: 'Must be at least 1. Must not be greater than 10.'
+                  example: 2
+      security: []
+    post:
+      summary: ''
+      operationId: postApiAnswers
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - 'Answer API'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                question_id:
+                  type: string
+                  description: ''
+                  example: veniam
+                content:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: zzzeayu
+                is_correct:
+                  type: boolean
+                  description: ''
+                  example: false
+              required:
+                - question_id
+                - content
+                - is_correct
+      security: []
+  '/api/answers/{id}':
+    get:
+      summary: ''
+      operationId: getApiAnswersId
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - 'Answer API'
+      security: []
+    patch:
+      summary: ''
+      operationId: patchApiAnswersId
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - 'Answer API'
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                question_id:
+                  type: string
+                  description: ''
+                  example: null
+                content:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: snktrfiaavgsq
+                is_correct:
+                  type: boolean
+                  description: ''
+                  example: true
+      security: []
+    delete:
+      summary: ''
+      operationId: deleteApiAnswersId
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - 'Answer API'
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the answer.'
+        example: enim
+        required: true
+        schema:
+          type: string
+  /api/register:
+    post:
+      summary: 'Register a new user'
+      operationId: registerANewUser
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: true
+                  data:
+                    access_token: UNKNOWN
+                    token_type: UNKNOWN
+                  message: 'Registered successfully'
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: object
+                    properties:
+                      access_token:
+                        type: string
+                        example: UNKNOWN
+                      token_type:
+                        type: string
+                        example: UNKNOWN
+                  message:
+                    type: string
+                    example: 'Registered successfully'
+      tags:
+        - 'Auth API'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: ''
+                  example: non
+                email:
+                  type: string
+                  description: 'Must be a valid email address.'
+                  example: kuphal.tara@example.org
+                password:
+                  type: string
+                  description: 'Must be at least 8 characters.'
+                  example: '-8J29eBAQ'
+              required:
+                - name
+                - email
+                - password
+      security: []
+  /api/login:
+    post:
+      summary: 'Login as an existing user'
+      operationId: loginAsAnExistingUser
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: true
+                  data:
+                    access_token: UNKNOWN
+                    token_type: UNKNOWN
+                  message: Logged-in
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: object
+                    properties:
+                      access_token:
+                        type: string
+                        example: UNKNOWN
+                      token_type:
+                        type: string
+                        example: UNKNOWN
+                  message:
+                    type: string
+                    example: Logged-in
+      tags:
+        - 'Auth API'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: 'Must be a valid email address.'
+                  example: kaley.hickle@example.org
+                password:
+                  type: string
+                  description: ''
+                  example: dolores
+              required:
+                - email
+                - password
+      security: []
+  /api/logout:
+    post:
+      summary: 'Logout of user'
+      operationId: logoutOfUser
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Logged out'
+                properties:
+                  message:
+                    type: string
+                    example: 'Logged out'
+      tags:
+        - 'Auth API'
+      security: []
+  /api/courses:
+    get:
+      summary: ''
+      operationId: getApiCourses
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - 'Course API'
+      security: []
+    post:
+      summary: ''
+      operationId: postApiCourses
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - 'Course API'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: jqeipmmxxpkfovizhjz
+                description:
+                  type: string
+                  description: ''
+                  example: 'Ullam dolore rerum ab deleniti error saepe officiis.'
+                level:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: g
+                is_published:
+                  type: boolean
+                  description: ''
+                  example: true
+              required:
+                - name
+                - description
+                - level
+      security: []
+  '/api/courses/{id}':
+    get:
+      summary: ''
+      operationId: getApiCoursesId
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - 'Course API'
+      security: []
+    patch:
+      summary: ''
+      operationId: patchApiCoursesId
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - 'Course API'
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: godevlplxk
+                description:
+                  type: string
+                  description: ''
+                  example: 'Aut molestias optio dolorem ut rerum voluptate.'
+                level:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: rmcsfo
+                is_published:
+                  type: boolean
+                  description: ''
+                  example: false
+      security: []
+    delete:
+      summary: ''
+      operationId: deleteApiCoursesId
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - 'Course API'
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the course.'
+        example: reprehenderit
+        required: true
+        schema:
+          type: string
+  /api/user:
+    get:
+      summary: ''
+      operationId: getApiUser
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+  '/api/{fallbackPlaceholder}':
+    get:
+      summary: ''
+      operationId: getApiFallbackPlaceholder
+      description: ''
+      parameters: []
+      responses:
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: false
+                  message: 'Page Not Found. If error persists, contact 20069321@tafe.wa.edu.au'
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: 'Page Not Found. If error persists, contact 20069321@tafe.wa.edu.au'
+      tags:
+        - 'Fallback API'
+      security: []
+    parameters:
+      -
+        in: path
+        name: fallbackPlaceholder
+        description: ''
+        example: QAI
+        required: true
+        schema:
+          type: string
+  /api/questions:
+    get:
+      summary: ''
+      operationId: getApiQuestions
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - 'Question API'
+      security: []
+    post:
+      summary: ''
+      operationId: postApiQuestions
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - 'Question API'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                quiz_id:
+                  type: string
+                  description: ''
+                  example: enim
+                content:
+                  type: string
+                  description: ''
+                  example: ipsam
+                type:
+                  type: string
+                  description: ''
+                  example: repudiandae
+                points:
+                  type: integer
+                  description: ''
+                  example: 18
+              required:
+                - quiz_id
+                - content
+                - type
+                - points
+      security: []
+  '/api/questions/{id}':
+    get:
+      summary: ''
+      operationId: getApiQuestionsId
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - 'Question API'
+      security: []
+    patch:
+      summary: ''
+      operationId: patchApiQuestionsId
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - 'Question API'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                quiz_id:
+                  type: string
+                  description: ''
+                  example: ducimus
+                content:
+                  type: string
+                  description: ''
+                  example: ut
+                type:
+                  type: string
+                  description: ''
+                  example: omnis
+                points:
+                  type: integer
+                  description: ''
+                  example: 19
+              required:
+                - quiz_id
+                - content
+                - type
+                - points
+      security: []
+    delete:
+      summary: ''
+      operationId: deleteApiQuestionsId
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - 'Question API'
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the question.'
+        example: officiis
+        required: true
+        schema:
+          type: string
+  /api/quizzes:
+    get:
+      summary: 'Display a listing of quizzes.'
+      operationId: displayAListingOfQuizzes
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - 'Quiz API'
+      security: []
+    post:
+      summary: 'Store a newly created quiz in storage.'
+      operationId: storeANewlyCreatedQuizInStorage
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - 'Quiz API'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                course_id:
+                  type: string
+                  description: ''
+                  example: pariatur
+                title:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: 'n'
+                description:
+                  type: string
+                  description: ''
+                  example: 'Modi at et ut occaecati veniam impedit.'
+                total_questions:
+                  type: integer
+                  description: 'Must be at least 1. Must not be greater than 20.'
+                  example: 17
+                active_status:
+                  type: boolean
+                  description: ''
+                  example: true
+                is_published:
+                  type: boolean
+                  description: ''
+                  example: true
+              required:
+                - course_id
+                - title
+                - total_questions
+                - active_status
+                - is_published
+      security: []
+  '/api/quizzes/{id}':
+    get:
+      summary: 'Display the specified quiz.'
+      operationId: displayTheSpecifiedQuiz
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - 'Quiz API'
+      security: []
+    patch:
+      summary: 'Update the specified quiz in storage.'
+      operationId: updateTheSpecifiedQuizInStorage
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - 'Quiz API'
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                course_id:
+                  type: string
+                  description: ''
+                  example: null
+                title:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: hturnmrhxwjqewpjhdrdkgjw
+                description:
+                  type: string
+                  description: ''
+                  example: 'Impedit quas sit voluptas ullam error.'
+                total_questions:
+                  type: integer
+                  description: 'Must be at least 1. Must not be greater than 20.'
+                  example: 12
+                active_status:
+                  type: boolean
+                  description: ''
+                  example: true
+                is_published:
+                  type: boolean
+                  description: ''
+                  example: true
+      security: []
+    delete:
+      summary: 'Remove the specified quiz from storage.'
+      operationId: removeTheSpecifiedQuizFromStorage
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - 'Quiz API'
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the quiz.'
+        example: amet
+        required: true
+        schema:
+          type: string
+  /api/quiz_attempts:
+    get:
+      summary: ''
+      operationId: getApiQuiz_attempts
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - 'Quiz Attempt API'
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                page:
+                  type: integer
+                  description: 'Must be at least 1.'
+                  example: 25
+                per_page:
+                  type: integer
+                  description: 'Must be at least 1. Must not be greater than 10.'
+                  example: 3
+      security: []
+    post:
+      summary: ''
+      operationId: postApiQuiz_attempts
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - 'Quiz Attempt API'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: string
+                  description: ''
+                  example: libero
+                quiz_id:
+                  type: string
+                  description: ''
+                  example: et
+                attempt_number:
+                  type: integer
+                  description: 'Must be at least 1.'
+                  example: 39
+                score:
+                  type: integer
+                  description: 'Must be at least 0.'
+                  example: 59
+                completed_at:
+                  type: string
+                  description: 'Must be a valid date.'
+                  example: '2023-11-28T13:29:46'
+              required:
+                - user_id
+                - quiz_id
+                - attempt_number
+      security: []
+  '/api/quiz_attempts/{id}':
+    get:
+      summary: ''
+      operationId: getApiQuiz_attemptsId
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - 'Quiz Attempt API'
+      security: []
+    patch:
+      summary: ''
+      operationId: patchApiQuiz_attemptsId
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - 'Quiz Attempt API'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: string
+                  description: ''
+                  example: harum
+                quiz_id:
+                  type: string
+                  description: ''
+                  example: quia
+                attempt_number:
+                  type: integer
+                  description: 'Must be at least 1.'
+                  example: 18
+                score:
+                  type: integer
+                  description: 'Must be at least 0.'
+                  example: 74
+                completed_at:
+                  type: string
+                  description: 'Must be a valid date.'
+                  example: '2023-11-28T13:29:46'
+              required:
+                - user_id
+                - quiz_id
+                - attempt_number
+      security: []
+    delete:
+      summary: ''
+      operationId: deleteApiQuiz_attemptsId
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - 'Quiz Attempt API'
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the quiz attempt.'
+        example: ex
+        required: true
+        schema:
+          type: string
+  /api/recommendations:
+    get:
+      summary: 'Display a listing of recommendations.'
+      operationId: displayAListingOfRecommendations
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - 'Recommendation API'
+      security: []
+    post:
+      summary: 'Store a newly created recommendation in storage.'
+      operationId: storeANewlyCreatedRecommendationInStorage
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - 'Recommendation API'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                result_id:
+                  type: string
+                  description: ''
+                  example: quisquam
+                content:
+                  type: string
+                  description: 'Must not be greater than 1000 characters.'
+                  example: wppuklezyfjwb
+                action_link:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: gunmyoncobjukljz
+              required:
+                - result_id
+                - content
+                - action_link
+      security: []
+  '/api/recommendations/{id}':
+    get:
+      summary: 'Display the specified recommendation.'
+      operationId: displayTheSpecifiedRecommendation
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - 'Recommendation API'
+      security: []
+    patch:
+      summary: 'Update the specified recommendation in storage.'
+      operationId: updateTheSpecifiedRecommendationInStorage
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - 'Recommendation API'
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                result_id:
+                  type: string
+                  description: ''
+                  example: null
+                content:
+                  type: string
+                  description: 'Must not be greater than 1000 characters.'
+                  example: khazceudyeylwtmpk
+                action_link:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: dmlcrjrriftfavoxayjyanwns
+      security: []
+    delete:
+      summary: 'Remove the specified recommendation from storage.'
+      operationId: removeTheSpecifiedRecommendationFromStorage
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - 'Recommendation API'
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the recommendation.'
+        example: in
+        required: true
+        schema:
+          type: string
+  /api/results:
+    get:
+      summary: 'Display a listing of results.'
+      operationId: displayAListingOfResults
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - 'Result API'
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                page:
+                  type: integer
+                  description: 'Must be at least 1.'
+                  example: 45
+                per_page:
+                  type: integer
+                  description: 'Must be at least 1. Must not be greater than 10.'
+                  example: 6
+      security: []
+    post:
+      summary: 'Store a newly created result.'
+      operationId: storeANewlyCreatedResult
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - 'Result API'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                quiz_attempt_id:
+                  type: string
+                  description: ''
+                  example: similique
+                user_id:
+                  type: string
+                  description: ''
+                  example: laudantium
+                score:
+                  type: integer
+                  description: ''
+                  example: 14
+                passed:
+                  type: boolean
+                  description: ''
+                  example: false
+                feedback:
+                  type: string
+                  description: ''
+                  example: earum
+              required:
+                - quiz_attempt_id
+                - user_id
+                - score
+                - passed
+      security: []
+  '/api/results/{id}':
+    get:
+      summary: 'Display the specified result.'
+      operationId: displayTheSpecifiedResult
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - 'Result API'
+      security: []
+    patch:
+      summary: 'Update the specified result.'
+      operationId: updateTheSpecifiedResult
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - 'Result API'
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                quiz_attempt_id:
+                  type: string
+                  description: ''
+                  example: null
+                user_id:
+                  type: string
+                  description: ''
+                  example: null
+                score:
+                  type: integer
+                  description: ''
+                  example: 19
+                passed:
+                  type: boolean
+                  description: ''
+                  example: false
+                feedback:
+                  type: string
+                  description: ''
+                  example: doloremque
+      security: []
+    delete:
+      summary: 'Remove the specified result.'
+      operationId: removeTheSpecifiedResult
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - 'Result API'
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the result.'
+        example: consequuntur
+        required: true
+        schema:
+          type: string
+  /api/users:
+    get:
+      summary: ''
+      operationId: getApiUsers
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - 'User API'
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                page:
+                  type: integer
+                  description: 'Must be at least 1.'
+                  example: 73
+                per_page:
+                  type: integer
+                  description: 'Must be at least 1. Must not be greater than 10.'
+                  example: 1
+      security: []
+    post:
+      summary: ''
+      operationId: postApiUsers
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - 'User API'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: ''
+                  example: minus
+                email:
+                  type: string
+                  description: 'Must be a valid email address.'
+                  example: iliana73@example.net
+                password:
+                  type: string
+                  description: ''
+                  example: occaecati
+                roles:
+                  type: string
+                  description: ''
+                  example: eum
+              required:
+                - name
+                - email
+                - password
+                - roles
+      security: []
+  '/api/users/{id}':
+    get:
+      summary: ''
+      operationId: getApiUsersId
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - 'User API'
+      security: []
+    patch:
+      summary: ''
+      operationId: patchApiUsersId
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - 'User API'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: ''
+                  example: aliquam
+                email:
+                  type: string
+                  description: ''
+                  example: null
+                password:
+                  type: string
+                  description: ''
+                  example: null
+                roles:
+                  type: string
+                  description: ''
+                  example: laudantium
+              required:
+                - name
+                - roles
+      security: []
+    delete:
+      summary: ''
+      operationId: deleteApiUsersId
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - 'User API'
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the user.'
+        example: sed
+        required: true
+        schema:
+          type: string
+tags:
+  -
+    name: 'Answer API'
+    description: "\nAPI endpoints for managing answers"
+  -
+    name: 'Auth API'
+    description: "\nAPI endpoints for managing authentication for the user"
+  -
+    name: 'Course API'
+    description: "\nAPI endpoints for managing courses"
+  -
+    name: Endpoints
+    description: ''
+  -
+    name: 'Fallback API'
+    description: "\nAPI endpoints for managing fallback responses"
+  -
+    name: 'Question API'
+    description: "\nAPI endpoints for managing questions"
+  -
+    name: 'Quiz API'
+    description: "\nAPI endpoints for managing quizzes"
+  -
+    name: 'Quiz Attempt API'
+    description: "\nAPI endpoints for managing quiz attempts"
+  -
+    name: 'Recommendation API'
+    description: "\nAPI endpoints for managing recommendations"
+  -
+    name: 'Result API'
+    description: "\nAPI endpoints for managing results"
+  -
+    name: 'User API'
+    description: "\nAPI endpoints for managing users"

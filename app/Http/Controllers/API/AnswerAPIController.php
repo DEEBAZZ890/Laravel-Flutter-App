@@ -8,6 +8,12 @@ use App\Http\Requests\UpdateAnswerAPIRequest;
 use App\Models\Answer;
 use Illuminate\Http\JsonResponse;
 
+
+/**
+ * @group Answer API
+ *
+ * API endpoints for managing answers
+ */
 class AnswerAPIController extends ApiBaseController
 {
     public function index(PaginationAPIRequest $request): JsonResponse

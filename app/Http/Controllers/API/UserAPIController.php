@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Arr;
 
+/**
+ * @group User API
+ *
+ * API endpoints for managing users
+ */
 class UserAPIController extends ApiBaseController
 {
     public function index(PaginationAPIRequest $request): JsonResponse
@@ -30,7 +35,6 @@ class UserAPIController extends ApiBaseController
         ]);
 
         $input = $request->all();
-        $input['password'] = Hash::make($input['password']);
 
         $user = User::create($input);
         $user->assignRole($request->input('roles'));

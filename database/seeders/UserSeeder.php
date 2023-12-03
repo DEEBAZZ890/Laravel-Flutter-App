@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder
 {
@@ -15,7 +16,7 @@ class UserSeeder extends Seeder
         $admin = User::create([
             'name' => 'Admin User',
             'email' => 'admin@example.com',
-            'password' => 'password', // Plain text, will be hashed automatically
+            'password' => Hash::make('password'),
         ]);
         $admin->assignRole('admin');
 
@@ -23,7 +24,7 @@ class UserSeeder extends Seeder
         $lecturer = User::create([
             'name' => 'Lecturer User',
             'email' => 'lecturer@example.com',
-            'password' => 'password', // Plain text, will be hashed automatically
+            'password' => Hash::make('password'),
         ]);
         $lecturer->assignRole('lecturer');
 
@@ -31,7 +32,7 @@ class UserSeeder extends Seeder
         $student = User::create([
             'name' => 'Student User',
             'email' => 'student@example.com',
-            'password' => 'password', // Plain text, will be hashed automatically
+            'password' => Hash::make('password'),
         ]);
         $student->assignRole('student');
     }

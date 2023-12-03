@@ -16,8 +16,12 @@
                             <p class="p-2 col-span-3">{{ $answer->content }}</p>
                             <p class="">{{ __("Correct") }}</p>
                             <p class="p-2 col-span-3">{{ $answer->is_correct ? 'Yes' : 'No' }}</p>
+                            <p class="">{{ __("Question ID") }}</p>
+                            <p class="p-2 col-span-3">{{ $answer->question->id }}</p>
                             <p class="">{{ __("Related Question") }}</p>
                             <p class="p-2 col-span-3">{{ $answer->question->content }}</p>
+                            <p class="">{{ __("Related Quiz") }}</p>
+                            <p class="p-2 col-span-3">{{ $answer->question->quiz->title }} (ID: {{ $answer->question->quiz->id }})</p>
                         </div>
                     @else
                         <div class="bg-red-200 text-red-800 p-2 rounded border-red-800 mb-4">
